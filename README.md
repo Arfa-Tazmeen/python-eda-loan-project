@@ -27,6 +27,10 @@ The objective of this analysis is to analyze applicant and loan data to identify
 - **columns_description.csv**  
   Data dictionary explaining the meaning of each column.
 
+The dataset is not included in this repository.
+The notebook contains all analysis, visualizations, and results.
+
+
 **Target Variable**
 - `TARGET = 0` → No payment difficulty  
 - `TARGET = 1` → Payment difficulty (default)
