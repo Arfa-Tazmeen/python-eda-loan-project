@@ -2,8 +2,7 @@
 # Loan Default Risk Analysis (EDA)
 
 ## Project Overview
-This project performs **Exploratory Data Analysis (EDA)** on a real-world loan application dataset to identify patterns and risk factors associated with **loan default**.  
-The analysis helps understand customer behavior and supports better credit risk decision-making.
+This project performs **Exploratory Data Analysis (EDA)** on a real-world loan application dataset to identify patterns and risk factors associated with **loan default**.
 
 This work was completed as part of an **internship assignment**.
 
@@ -14,7 +13,7 @@ Financial institutions face two major risks:
 1. Rejecting applicants who are capable of repaying loans (loss of business).
 2. Approving applicants who later default (financial loss).
 
-The objective of this analysis is to explore customer and loan attributes to identify factors that differentiate **clients with payment difficulties** from others.
+The objective of this analysis is to analyze applicant and loan data to identify key drivers of default risk.
 
 ---
 
@@ -29,52 +28,49 @@ The objective of this analysis is to explore customer and loan attributes to ide
   Data dictionary explaining the meaning of each column.
 
 **Target Variable**
-- `TARGET = 0` → No payment difficulties  
-- `TARGET = 1` → Payment difficulties (default)
+- `TARGET = 0` → No payment difficulty  
+- `TARGET = 1` → Payment difficulty (default)
 
 ---
 
 ## Key Steps Performed
 
 ### 1. Data Understanding
-- Inspected dataset structure, size, and column definitions.
-- Identified numerical and categorical features.
+- Explored dataset structure, feature types, and target variable.
 
 ### 2. Missing Data Analysis
-- Calculated missing value counts and percentages for all columns.
-- Dropped columns with more than **40% missing values**.
-- Applied **median imputation** for selected numerical variables (e.g., `AMT_ANNUITY`).
-- Handled special anomaly values (e.g., `DAYS_EMPLOYED = 365243`) by flagging and replacing with NaN.
+- Dropped columns with >40% missing values.  
+- Applied median imputation for selected numeric features.  
+- Handled anomaly values (e.g., `DAYS_EMPLOYED = 365243`).
+
 
 ### 3. Outlier Detection
 - Used the **IQR (Interquartile Range) method** to identify outliers in key numerical variables.
 - Visualized outliers using boxplots.
-- Outliers were not removed, as they may represent genuine high-value clients.
+- Outliers were retained for analysis, as they may represent genuine high-value clients.
 
 ### 4. Target Imbalance Analysis
 - Identified strong class imbalance:
   - 0 (No default): 282,686 (~91.95%)
   - 1 (Default): 24,825 (~8.05%)
 - Imbalance ratio ≈ **11.4 : 1**
-- Visualized imbalance using bar plots with counts and percentages.
+- Visualized imbalance using bar plots.
 
-### 5. Univariate & Segmented Analysis
+### 5. Univariate Analysis
 - Analyzed distributions of numerical and categorical variables.
-- Compared feature distributions across default and non-default clients.
-- Observed higher default risk among:
-  - Lower-income applicants
-  - Younger applicants
-  - Higher loan-to-income ratios
+- Identified skewness, dominant categories, and potential outliers in the data.
 
-### 6. Previous Application Feature Engineering
-- Aggregated historical loan data per client:
-  - Number of previous applications
-  - Number of approvals and refusals
-  - Mean and maximum previous credit amounts
-- Merged engineered features with main application data.
-- Found that repeated past refusals are linked to higher default risk.
+### 6.Segmented Analysis by TARGET 
+- Key numerical features were analyzed separately for defaulters and non-defaulters.
+- Highlighted how borrower characteristics such as income, credit amount, and age differ between the two groups.
 
-### 7. Correlation Analysis
+### 7. Bivariate Analysis
+- Explored relationships between feature pairs and their link to default risk.  
+Two key variable pairs were analyzed:  
+- **Income vs Credit:** High credit relative to income increases default risk.  
+- **Employment vs Previous Applications:** Longer employment lowers risk, while multiple past refusals increase it.
+
+### 8. Correlation Analysis
 - Computed correlations separately for defaulters and non-defaulters.
 - Identified top correlated numeric feature pairs (excluding TARGET).
 - Observed more variability in correlations for defaulting clients.
